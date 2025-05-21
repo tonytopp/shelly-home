@@ -44,3 +44,4 @@ Thumbs.db
 *.tmp
 *.bak
 *.backup
+node_modules

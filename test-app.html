@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Shelly Smart Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .api-result {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shelly Smart Home Test Page</h1>
+    <p>This page will help test if your Shelly Smart Home application is working correctly.</p>
+    
+    <a href="http://localhost:5001" target="_blank" class="button">Open Shelly Smart Home App</a>
+    
+    <h2>API Test</h2>
+    <button id="testApi" class="button">Test API Connection</button>
+    
+    <div id="apiResult" class="api-result">Results will appear here...</div>
+    
+    <script>
+        document.getElementById('testApi').addEventListener('click', async () => {
+            const resultDiv = document.getElementById('apiResult');
+            resultDiv.textContent = 'Fetching data...';
+            
+            try {
+                const response = await fetch('http://localhost:5001/api/devices');
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
